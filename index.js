@@ -74,7 +74,6 @@ module.exports = function (request, options) {
     }
 
     function cleanup() {
-      console.log('clean up is getting called');
       busboy.removeListener('field', onField);
       busboy.removeListener('file', customOnFile || onFile);
       busboy.removeListener('close', cleanup);
