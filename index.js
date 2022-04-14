@@ -18,7 +18,8 @@ module.exports = function (request, options) {
     const fields = {};
     const filePromises = [];
 
-    request.on('close', cleanup);
+    // removed by suggestion of https://github.com/m4nuC/async-busboy/issues/49
+    // request.on('close', cleanup);
 
     busboy
       .on('field', onField.bind(null, fields))
@@ -73,6 +74,7 @@ module.exports = function (request, options) {
     }
 
     function cleanup() {
+      console.log('clean up is getting called');
       busboy.removeListener('field', onField);
       busboy.removeListener('file', customOnFile || onFile);
       busboy.removeListener('close', cleanup);
